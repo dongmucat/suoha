@@ -21,7 +21,7 @@
 |------|------|------|
 | React | 19.x | UI 框架 |
 | TypeScript | 5.9 | 类型安全 |
-| Vite | 7.x | 构建工具 |
+| Vite | 8.x | 构建工具（Rolldown + Oxc） |
 | Tailwind CSS | 4.x | 样式方案 |
 | shadcn/ui | 4.x | UI 组件库 |
 | Zustand | 5.x | 状态管理 |
