@@ -130,18 +130,28 @@ npm run lint
 
 ### 使用 Docker 镜像
 
+镜像已包含所有依赖（nginx + Spring Boot + Redis），服务器只需安装 Docker。
+
 ```bash
 # 从 GitHub Container Registry 拉取镜像
-docker pull ghcr.io/<owner>/suoha:latest
+docker pull ghcr.io/dongmucat/suoha:latest
 
-# 运行容器（需要 Redis）
+# 运行容器（all-in-one，无需外部依赖）
 docker run -d \
   -p 80:80 \
-  -e REDIS_HOST=redis \
-  -e JWT_SECRET=your-secret-key \
+  -e JWT_SECRET="换成你自己的密钥至少32位" \
+  -v suoha-data:/data \
+  --restart unless-stopped \
   --name suoha \
-  ghcr.io/<owner>/suoha:latest
+  ghcr.io/dongmucat/suoha:latest
 ```
+
+访问 `http://服务器IP` 即可使用。
+
+参数说明：
+- `-v suoha-data:/data` — Redis 数据持久化，容器重启不丢数据
+- `--restart unless-stopped` — 服务器重启后自动拉起容器
+- `-e JWT_SECRET` — 生产环境必须修改为随机密钥
 
 ### 本地构建镜像
 
