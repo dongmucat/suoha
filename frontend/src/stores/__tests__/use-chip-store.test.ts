@@ -7,6 +7,7 @@ const mockSocket = {
   on: vi.fn(),
   emit: vi.fn(),
   disconnect: vi.fn(),
+  removeAllListeners: vi.fn(),
 };
 
 vi.mock('@/lib/socket', () => ({

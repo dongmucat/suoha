@@ -4,13 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 // https://vite.dev/config/
-export default defineConfig(async ({ mode }) => ({
+export default defineConfig(() => ({
   plugins: [
     react(),
     tailwindcss(),
-    ...(mode === 'analyze'
-      ? [(await import('rollup-plugin-visualizer')).visualizer({ open: true, gzipSize: true, filename: 'dist/stats.html' })]
-      : []),
   ],
   resolve: {
     alias: {
@@ -19,12 +16,14 @@ export default defineConfig(async ({ mode }) => ({
   },
   build: {
     chunkSizeWarningLimit: 500,
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router'],
-          socket: ['socket.io-client'],
-          qrcode: ['qrcode.react'],
+        codeSplitting: {
+          groups: [
+            { test: /react|react-dom|react-router/, name: 'vendor' },
+            { test: /socket\.io-client/, name: 'socket' },
+            { test: /qrcode\.react/, name: 'qrcode' },
+          ],
         },
       },
     },
