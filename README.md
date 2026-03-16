@@ -47,6 +47,8 @@
 
 - Redis 7.x — 房间状态临时存储、掉线恢复
 - HTTPS + WSS — 通信加密
+- Docker — 容器化部署
+- GitHub Actions — CI/CD 自动构建推送
 
 ## 项目结构
 
@@ -69,7 +71,10 @@ suoha/
 │       ├── repository/      # 数据访问层
 │       ├── security/        # JWT 认证过滤器
 │       └── exception/       # 全局异常处理
-└── _bmad-output/            # BMAD 规划产出物（PRD、架构、UX 等）
+├── _bmad-output/            # BMAD 规划产出物（PRD、架构、UX 等）
+├── deploy/                  # 部署配置（nginx、supervisord）
+├── .github/workflows/       # GitHub Actions CI/CD 工作流
+└── Dockerfile               # 多阶段构建（前端+后端+运行时）
 ```
 
 ## 快速开始
@@ -120,6 +125,46 @@ npm test
 cd frontend
 npm run lint
 ```
+
+## Docker 部署
+
+### 使用 Docker 镜像
+
+```bash
+# 从 GitHub Container Registry 拉取镜像
+docker pull ghcr.io/<owner>/suoha:latest
+
+# 运行容器（需要 Redis）
+docker run -d \
+  -p 80:80 \
+  -e REDIS_HOST=redis \
+  -e JWT_SECRET=your-secret-key \
+  --name suoha \
+  ghcr.io/<owner>/suoha:latest
+```
+
+### 本地构建镜像
+
+```bash
+# 构建镜像
+docker build -t suoha:local .
+
+# 运行
+docker run -d -p 80:80 -e REDIS_HOST=redis suoha:local
+```
+
+### CI/CD 自动化
+
+项目配置了 GitHub Actions 工作流，在以下情况自动构建并推送镜像到 `ghcr.io`：
+- push 到 `main` 分支
+- 手动触发工作流
+
+镜像标签：
+- `latest` — 最新版本
+- `main-<sha>` — 带 git commit SHA 的版本标签
+
+查看构建状态：GitHub Actions 页面
+查看镜像：仓库右侧 Packages 栏
 
 ## 架构概览
 

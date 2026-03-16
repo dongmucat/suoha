@@ -45,6 +45,9 @@ _本文件包含 AI 代理在本项目中实现代码时必须遵循的关键规
 - REST API 端口：9091
 - Socket.IO 端口：9092
 - 前端开发代理：vite proxy /api → localhost:9091
+- Docker 多阶段构建（前端 pnpm + 后端 Maven + 运行时 Alpine + nginx + supervisord）
+- GitHub Actions CI/CD（push main 或手动触发 → 自动构建推送到 ghcr.io）
+- 镜像标签策略：`latest` + `main-<sha>` 双标签
 
 ### 版本约束
 - Tailwind CSS 4.x 使用 Vite 插件模式，不再需要 tailwind.config.js 和 postcss.config.js
@@ -202,6 +205,17 @@ _本文件包含 AI 代理在本项目中实现代码时必须遵循的关键规
 - vite.config.ts 配置 `/api` 代理到 `http://localhost:9091`
 - Socket.IO 直连 `http://localhost:9092`（不走代理）
 
+#### Docker 与 CI/CD
+- Dockerfile：多阶段构建（node:20-alpine → maven:3.9-eclipse-temurin-21 → eclipse-temurin:21-jre-alpine）
+- 运行时包含 nginx（静态文件）+ Spring Boot（API）+ Redis + supervisord（进程管理）
+- `.dockerignore` 排除 `.git`、`node_modules`、`target`、`.claude`、`_bmad*`、`docs` 等
+- GitHub Actions 工作流：`.github/workflows/docker.yml`
+- 触发条件：push main / workflow_dispatch
+- 镜像仓库：`ghcr.io/<owner>/suoha`
+- 标签：`latest` + `main-<sha>`
+- 使用 GitHub Actions cache（`cache-from/to: type=gha`）加速构建
+- 部署配置文件在 `deploy/` 目录（nginx.conf、supervisord.conf）
+
 ### 关键防错规则
 
 #### 并发与数据一致性
@@ -256,4 +270,4 @@ _本文件包含 AI 代理在本项目中实现代码时必须遵循的关键规
 - 技术栈变更时及时更新
 - 定期审查移除过时规则
 
-最后更新：2026-03-13
+最后更新：2026-03-16
