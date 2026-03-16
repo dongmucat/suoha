@@ -1,0 +1,60 @@
+# generated: 2026-03-09
+# project: suoha
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: "_bmad-output/implementation-artifacts"
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Mark epic as 'in-progress' when starting work on its first story
+# - SM typically creates next story ONLY after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then Dev runs code-review (fresh context, ideally different LLM)
+
+development_status:
+  epic-1: done
+  1-1-project-init-and-infrastructure: done
+  1-2-user-authentication: done
+  epic-1-retrospective: optional
+
+  epic-2: done
+  2-1-room-creation-and-joining: done
+  2-2-room-management: done
+  epic-2-retrospective: optional
+
+  epic-3: done
+  3-1-chip-system: done
+  3-2-pot-system-and-bet-details: done
+  epic-3-retrospective: optional
+
+  epic-4: done
+  4-1-websocket-realtime-communication: done
+  4-2-reconnection-and-state-recovery: done
+  epic-4-retrospective: optional
+
+  epic-5: done
+  5-1-game-settlement: done
+  5-2-settlement-display-and-data-cleanup: done
+  epic-5-retrospective: optional
+
+  epic-6: done
+  6-1-poker-rules-tips: done
+  6-2-frontend-performance-optimization: done
+  epic-6-retrospective: optional

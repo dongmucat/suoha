@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梭哈 - 设计方向探索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1E293B;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .intro {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            color: #2563EB;
+            margin-bottom: 16px;
+        }
+
+        .intro ul {
+            margin-left: 24px;
+            line-height: 1.8;
+        }
+
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .direction-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .direction-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .direction-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+            color: white;
+        }
+
+        .direction-header h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .direction-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .mockup-container {
+            padding: 24px;
+            background: #f8f9fa;
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        /* Direction 1: 极简专业型 */
+        .direction-1 .phone-mockup {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .direction-1 .top-bar {
+            background: #2563EB;
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .direction-1 .pool-section {
+            background: #F8FAFC;
+            padding: 32px 16px;
+            text-align: center;
+        }
+
+        .direction-1 .pool-label {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 8px;
+        }
+
+        .direction-1 .pool-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1E293B;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-1 .players-list {
+            padding: 16px;
+        }
+
+        .direction-1 .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 8px;
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+        }
+
+        .direction-1 .player-name {
+            font-size: 16px;
+            color: #1E293B;
+        }
+
+        .direction-1 .player-chips {
+            font-size: 20px;
+            font-weight: 600;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-1 .chips-positive {
+            color: #16A34A;
+        }
+
+        .direction-1 .chips-negative {
+            color: #EF4444;
+        }
+
+        .direction-1 .action-buttons {
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .direction-1 .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .direction-1 .quick-btn {
+            padding: 16px 8px;
+            background: #F59E0B;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .direction-1 .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .direction-1 .action-btn {
+            padding: 14px;
+            background: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Direction 2: 游戏化活力型 */
+        .direction-2 .phone-mockup {
+            background: linear-gradient(180deg, #EEF2FF 0%, #FEF3C7 100%);
+        }
+
+        .direction-2 .top-bar {
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 24px 24px;
+        }
+
+        .direction-2 .pool-section {
+            background: white;
+            margin: 16px;
+            padding: 24px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+        }
+
+        .direction-2 .pool-label {
+            font-size: 14px;
+            color: #8B5CF6;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .direction-2 .pool-amount {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-2 .players-list {
+            padding: 0 16px;
+        }
+
+        .direction-2 .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .direction-2 .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .direction-2 .quick-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Direction 3: 深色专注型 */
+        .direction-3 .phone-mockup {
+            background: #1E293B;
+        }
+
+        .direction-3 .top-bar {
+            background: #0F172A;
+            color: #94A3B8;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .direction-3 .pool-section {
+            background: #0F172A;
+            padding: 32px 16px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .direction-3 .pool-label {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 8px;
+        }
+
+        .direction-3 .pool-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #F8FAFC;
+            font-family: "SF Mono", monospace;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .direction-3 .players-list {
+            padding: 16px;
+        }
+
+        .direction-3 .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 8px;
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 12px;
+        }
+
+        .direction-3 .player-name {
+            color: #CBD5E1;
+        }
+
+        .direction-3 .player-chips {
+            font-size: 20px;
+            font-weight: 600;
+            font-family: "SF Mono", monospace;
+            color: #F8FAFC;
+        }
+
+        .direction-3 .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .direction-3 .quick-btn {
+            padding: 16px 8px;
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Direction 4: 扁平简洁型 */
+        .direction-4 .phone-mockup {
+            background: #FAFAFA;
+        }
+
+        .direction-4 .top-bar {
+            background: #2563EB;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .direction-4 .pool-section {
+            background: #2563EB;
+            color: white;
+            padding: 40px 16px;
+            text-align: center;
+        }
+
+        .direction-4 .pool-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .direction-4 .pool-amount {
+            font-size: 56px;
+            font-weight: 900;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-4 .players-list {
+            padding: 16px;
+        }
+
+        .direction-4 .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 16px;
+            margin-bottom: 2px;
+            background: white;
+        }
+
+        .direction-4 .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: #E5E7EB;
+        }
+
+        .direction-4 .quick-btn {
+            padding: 24px;
+            background: #F59E0B;
+            color: white;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Direction 5: 卡片层叠型 */
+        .direction-5 .phone-mockup {
+            background: #F1F5F9;
+        }
+
+        .direction-5 .top-bar {
+            background: white;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .direction-5 .pool-card {
+            background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+            margin: 16px;
+            padding: 32px 24px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+        }
+
+        .direction-5 .pool-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 8px;
+        }
+
+        .direction-5 .pool-amount {
+            font-size: 44px;
+            font-weight: 700;
+            color: white;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-5 .players-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+
+        .direction-5 .player-card {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .direction-5 .player-name {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 8px;
+        }
+
+        .direction-5 .player-chips {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-5 .quick-buttons {
+            display: flex;
+            gap: 8px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+
+        .direction-5 .quick-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 16px;
+            background: #F59E0B;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Direction 6: 列表紧凑型 */
+        .direction-6 .phone-mockup {
+            background: white;
+        }
+
+        .direction-6 .top-bar {
+            background: #F8FAFC;
+            padding: 12px 16px;
+            border-bottom: 2px solid #2563EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .direction-6 .pool-section {
+            background: #EFF6FF;
+            padding: 20px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #DBEAFE;
+        }
+
+        .direction-6 .pool-label {
+            font-size: 14px;
+            color: #2563EB;
+            font-weight: 600;
+        }
+
+        .direction-6 .pool-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1E293B;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-6 .players-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .direction-6 .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .direction-6 .player-name {
+            font-size: 15px;
+            color: #475569;
+        }
+
+        .direction-6 .player-chips {
+            font-size: 18px;
+            font-weight: 600;
+            font-family: "SF Mono", monospace;
+        }
+
+        .direction-6 .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: #E2E8F0;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .direction-6 .quick-btn {
+            padding: 16px 8px;
+            background: white;
+            color: #2563EB;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .direction-6 .quick-btn:active {
+            background: #EFF6FF;
+        }
+
+        .comparison-section {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-section h2 {
+            color: #1E293B;
+            margin-bottom: 24px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .comparison-table th {
+            background: #F8FAFC;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .tag-trust {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .tag-fun {
+            background: #FCE7F3;
+            color: #BE185D;
+        }
+
+        .tag-focus {
+            background: #E0E7FF;
+            color: #4338CA;
+        }
+
+        .tag-simple {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        @media (max-width: 768px) {
+            .directions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 梭哈 - 设计方向探索</h1>
+
+        <div class="intro">
+            <h2>设计探索说明</h2>
+            <p>基于已确立的设计基础（颜色系统、字体系统、体验原则），我们探索了 6 个不同的视觉设计方向。每个方向都保持核心交互模式不变，但在视觉风格、信息密度、色彩运用上有所差异。</p>
+            <br>
+            <p><strong>评估维度：</strong></p>
+            <ul>
+                <li><strong>信息层级</strong> - 关键数字（池底、筹码）是否足够突出？</li>
+                <li><strong>操作效率</strong> - 快捷按钮是否易于点击？触摸目标是否足够大？</li>
+                <li><strong>视觉舒适度</strong> - 长时间使用是否舒适？是否适合线下游戏场景？</li>
+                <li><strong>品牌情感</strong> - 是否传达"信任、放心、专注"的情感目标？</li>
+                <li><strong>移动端适配</strong> - 是否充分利用移动端屏幕空间？</li>
+            </ul>
+        </div>
+
+        <div class="directions-grid">
+            <!-- Direction 1: 极简专业型 -->
+            <div class="direction-card direction-1">
+                <div class="direction-header">
+                    <h3>方向 1: 极简专业型</h3>
+                    <p>大量留白 · 蓝色信任感 · 卡片式布局</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">
+                            <span>房间 123456</span>
+                            <span style="color: #10B981;">● 已连接</span>
+                        </div>
+                        <div class="pool-section">
+                            <div class="pool-label">池底</div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <span class="player-name">小李 (我)</span>
+                                <span class="player-chips chips-positive">+350</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">老王</span>
+                                <span class="player-chips chips-negative">-120</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">小张</span>
+                                <span class="player-chips">0</span>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="quick-buttons">
+                                <button class="quick-btn">20</button>
+                                <button class="quick-btn">50</button>
+                                <button class="quick-btn">100</button>
+                                <button class="quick-btn">1000</button>
+                            </div>
+                            <div class="action-row">
+                                <button class="action-btn">收回池底</button>
+                                <button class="action-btn">平分池底</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 2: 游戏化活力型 -->
+            <div class="direction-card direction-2">
+                <div class="direction-header">
+                    <h3>方向 2: 游戏化活力型</h3>
+                    <p>渐变色彩 · 圆角设计 · 动感元素</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">
+                            <span>🎮 房间 123456</span>
+                            <span>8 人在线</span>
+                        </div>
+                        <div class="pool-section">
+                            <div class="pool-label">🎯 池底总额</div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <span>👤 小李 (我)</span>
+                                <span style="color: #16A34A; font-weight: 700;">+350</span>
+                            </div>
+                            <div class="player-item">
+                                <span>👤 老王</span>
+                                <span style="color: #EF4444; font-weight: 700;">-120</span>
+                            </div>
+                            <div class="player-item">
+                                <span>👤 小张</span>
+                                <span style="font-weight: 700;">0</span>
+                            </div>
+                        </div>
+                        <div class="quick-buttons">
+                            <button class="quick-btn">💰 20</button>
+                            <button class="quick-btn">💰 50</button>
+                            <button class="quick-btn">💰 100</button>
+                            <button class="quick-btn">💰 1000</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 3: 深色专注型 -->
+            <div class="direction-card direction-3">
+                <div class="direction-header">
+                    <h3>方向 3: 深色专注型</h3>
+                    <p>深色背景 · 高对比度 · 夜间友好</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">
+                            <span>房间 123456</span>
+                            <span>● 已连接</span>
+                        </div>
+                        <div class="pool-section">
+                            <div class="pool-label">池底</div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <span class="player-name">小李 (我)</span>
+                                <span class="player-chips" style="color: #10B981;">+350</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">老王</span>
+                                <span class="player-chips" style="color: #EF4444;">-120</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">小张</span>
+                                <span class="player-chips">0</span>
+                            </div>
+                        </div>
+                        <div class="quick-buttons">
+                            <button class="quick-btn">20</button>
+                            <button class="quick-btn">50</button>
+                            <button class="quick-btn">100</button>
+                            <button class="quick-btn">1000</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 4: 扁平简洁型 -->
+            <div class="direction-card direction-4">
+                <div class="direction-header">
+                    <h3>方向 4: 扁平简洁型</h3>
+                    <p>纯色块 · 无阴影 · 大按钮</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">房间 123456 · 8 人在线</div>
+                        <div class="pool-section">
+                            <div class="pool-label">池底</div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <span>小李 (我)</span>
+                                <span style="color: #16A34A; font-weight: 700; font-size: 20px;">+350</span>
+                            </div>
+                            <div class="player-item">
+                                <span>老王</span>
+                                <span style="color: #EF4444; font-weight: 700; font-size: 20px;">-120</span>
+                            </div>
+                            <div class="player-item">
+                                <span>小张</span>
+                                <span style="font-weight: 700; font-size: 20px;">0</span>
+                            </div>
+                        </div>
+                        <div class="quick-buttons">
+                            <button class="quick-btn">20</button>
+                            <button class="quick-btn">50</button>
+                            <button class="quick-btn">100</button>
+                            <button class="quick-btn">1000</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 5: 卡片层叠型 -->
+            <div class="direction-card direction-5">
+                <div class="direction-header">
+                    <h3>方向 5: 卡片层叠型</h3>
+                    <p>卡片式 · 网格布局 · 视觉层次</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">
+                            <span style="font-weight: 600; color: #2563EB;">房间 123456</span>
+                            <span style="color: #10B981;">● 在线</span>
+                        </div>
+                        <div class="pool-card">
+                            <div class="pool-label">池底总额</div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-grid">
+                            <div class="player-card">
+                                <div class="player-name">小李 (我)</div>
+                                <div class="player-chips" style="color: #16A34A;">+350</div>
+                            </div>
+                            <div class="player-card">
+                                <div class="player-name">老王</div>
+                                <div class="player-chips" style="color: #EF4444;">-120</div>
+                            </div>
+                            <div class="player-card">
+                                <div class="player-name">小张</div>
+                                <div class="player-chips" style="color: #64748B;">0</div>
+                            </div>
+                            <div class="player-card">
+                                <div class="player-name">小赵</div>
+                                <div class="player-chips" style="color: #16A34A;">+80</div>
+                            </div>
+                        </div>
+                        <div class="quick-buttons">
+                            <button class="quick-btn">20</button>
+                            <button class="quick-btn">50</button>
+                            <button class="quick-btn">100</button>
+                            <button class="quick-btn">1K</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 6: 列表紧凑型 -->
+            <div class="direction-card direction-6">
+                <div class="direction-header">
+                    <h3>方向 6: 列表紧凑型</h3>
+                    <p>紧凑布局 · 信息密度高 · 效率优先</p>
+                </div>
+                <div class="mockup-container">
+                    <div class="phone-mockup">
+                        <div class="top-bar">
+                            <span style="font-weight: 600;">房间 123456</span>
+                            <span style="color: #10B981; font-size: 12px;">● 已连接</span>
+                        </div>
+                        <div class="pool-section">
+                            <div>
+                                <div class="pool-label">池底</div>
+                                <div style="font-size: 12px; color: #64748B;">3 人下注</div>
+                            </div>
+                            <div class="pool-amount">1,250</div>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <span class="player-name">小李 (我)</span>
+                                <span class="player-chips" style="color: #16A34A;">+350</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">老王</span>
+                                <span class="player-chips" style="color: #EF4444;">-120</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">小张</span>
+                                <span class="player-chips">0</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">小赵</span>
+                                <span class="player-chips" style="color: #16A34A;">+80</span>
+                            </div>
+                            <div class="player-item">
+                                <span class="player-name">老刘</span>
+                                <span class="player-chips" style="color: #EF4444;">-50</span>
+                            </div>
+                        </div>
+                        <div class="quick-buttons">
+                            <button class="quick-btn">20</button>
+                            <button class="quick-btn">50</button>
+                            <button class="quick-btn">100</button>
+                            <button class="quick-btn">1K</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <h2>📊 设计方向对比分析</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>设计方向</th>
+                        <th>视觉风格</th>
+                        <th>信息密度</th>
+                        <th>情感传达</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>方向 1: 极简专业型</strong></td>
+                        <td>留白充足，卡片式</td>
+                        <td>中等</td>
+                        <td><span class="tag tag-trust">信任</span><span class="tag tag-simple">简洁</span></td>
+                        <td>正式场合，注重专业感</td>
+                    </tr>
+                    <tr>
+                        <td><strong>方向 2: 游戏化活力型</strong></td>
+                        <td>渐变色，圆角，emoji</td>
+                        <td>中等</td>
+                        <td><span class="tag tag-fun">活力</span><span class="tag tag-simple">轻松</span></td>
+                        <td>朋友聚会，轻松氛围</td>
+                    </tr>
+                    <tr>
+                        <td><strong>方向 3: 深色专注型</strong></td>
+                        <td>深色背景，高对比</td>
+                        <td>中等</td>
+                        <td><span class="tag tag-focus">专注</span><span class="tag tag-trust">沉稳</span></td>
+                        <td>夜间游戏，减少视觉疲劳</td>
+                    </tr>
+                    <tr>
+                        <td><strong>方向 4: 扁平简洁型</strong></td>
+                        <td>纯色块，无阴影</td>
+                        <td>中等</td>
+                        <td><span class="tag tag-simple">直接</span><span class="tag tag-trust">清晰</span></td>
+                        <td>快速操作，效率优先</td>
+                    </tr>
+                    <tr>
+                        <td><strong>方向 5: 卡片层叠型</strong></td>
+                        <td>卡片网格，层次丰富</td>
+                        <td>高</td>
+                        <td><span class="tag tag-trust">有序</span><span class="tag tag-simple">清晰</span></td>
+                        <td>多人游戏，信息展示</td>
+                    </tr>
+                    <tr>
+                        <td><strong>方向 6: 列表紧凑型</strong></td>
+                        <td>列表式，紧凑布局</td>
+                        <td>高</td>
+                        <td><span class="tag tag-simple">高效</span><span class="tag tag-focus">专注</span></td>
+                        <td>多人游戏，屏幕利用率</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="margin-top: 40px;">💡 设计建议</h2>
+            <div style="line-height: 1.8; color: #475569;">
+                <p><strong>推荐方向：</strong></p>
+                <ul style="margin-left: 24px; margin-top: 12px;">
+                    <li><strong>方向 1 (极简专业型)</strong> - 最符合"信任、放心"的情感目标，适合作为主设计方向</li>
+                    <li><strong>方向 3 (深色专注型)</strong> - 可作为夜间模式的备选方案</li>
+                    <li><strong>方向 5 (卡片层叠型)</strong> - 适合多人游戏场景，信息展示清晰</li>
+                </ul>
+                <br>
+                <p><strong>组合建议：</strong></p>
+                <ul style="margin-left: 24px; margin-top: 12px;">
+                    <li>采用方向 1 的整体布局和配色（蓝色主色调，卡片式）</li>
+                    <li>借鉴方向 5 的网格布局（多人时更清晰）</li>
+                    <li>保留方向 4 的大按钮设计（触摸友好）</li>
+                    <li>考虑方向 3 作为深色模式选项</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -47,7 +47,6 @@ Thumbs.db
 
 # AI/Agent
 .omc/
-_bmad-output/
 
 # local
 *.local.json
