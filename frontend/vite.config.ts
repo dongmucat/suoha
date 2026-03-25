@@ -34,6 +34,11 @@ export default defineConfig(() => ({
         target: 'http://localhost:9091',
         changeOrigin: true,
       },
+      '/socket.io': {
+        target: 'http://localhost:9092',
+        changeOrigin: true,
+        ws: true,
+      },
     },
   },
   test: {

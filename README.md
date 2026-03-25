@@ -153,6 +153,10 @@ docker run -d \
 - `--restart unless-stopped` — 服务器重启后自动拉起容器
 - `-e JWT_SECRET` — 生产环境必须修改为随机密钥
 
+部署说明：
+- all-in-one 镜像默认通过容器内 Nginx 反向代理 `/api` 和 `/socket.io`，浏览器应始终访问同源地址 `http://你的域名`。
+- 不要在生产构建里把 `VITE_API_BASE_URL` 或 `VITE_SOCKET_URL` 设成 `http://域名:9091`、`http://域名:9092` 这类跨域绝对地址；否则会绕过同源代理并触发 CORS/跨域问题。
+
 ### 本地构建镜像
 
 ```bash
