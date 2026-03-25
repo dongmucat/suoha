@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router'
-import { QRCodeSVG } from 'qrcode.react'
+
 import { BookOpen } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRoomStore } from '@/stores/use-room-store'
@@ -153,8 +153,7 @@ export default function RoomPage() {
     )
   }
 
-  const joinUrl = `${window.location.origin}/join?code=${room.roomCode}`
-  const isHost = user?.userId === room.hostUserId
+const isHost = user?.userId === room.hostUserId
 
   const handleBet = (amount: number) => { setConfirmBet(amount) }
 
@@ -330,18 +329,7 @@ export default function RoomPage() {
           </div>
         )}
 
-        {/* QR Code */}
-        <motion.div variants={listItem} className="flex flex-col items-center gap-3 rounded-3xl bg-card p-6 shadow-[var(--shadow-cute)] border-2 border-border">
-          <QRCodeSVG value={joinUrl} size={180} />
-          <p className="text-sm text-text-secondary">扫码加入房间</p>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold tracking-widest text-text-primary">
-              {room.roomCode}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* 池底显示 */}
+{/* 池底显示 */}
         <motion.div variants={listItem} className="w-full max-w-sm">
           <PotDisplay players={room.players} />
         </motion.div>
