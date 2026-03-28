@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BookOpen } from 'lucide-react'
@@ -15,6 +15,13 @@ export default function HomePage() {
   const [roomCode, setRoomCode] = useState('')
   const [localError, setLocalError] = useState('')
   const [showRules, setShowRules] = useState(false)
+
+  // 如果用户已在房间中，自动跳转到该房间
+  useEffect(() => {
+    if (user?.currentRoomId) {
+      navigate(`/room/${user.currentRoomId}`, { replace: true })
+    }
+  }, [user?.currentRoomId, navigate])
 
   const handleCreateRoom = async () => {
     setLocalError('')

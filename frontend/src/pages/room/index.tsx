@@ -132,6 +132,20 @@ export default function RoomPage() {
     }
   }, [roomId, fetchRoomInfo])
 
+  // 如果房间不存在，清除用户状态并返回首页
+  useEffect(() => {
+    if (error && !isLoading && !room) {
+      const user = useAuthStore.getState().user
+      if (user?.currentRoomId === roomId) {
+        useAuthStore.setState({
+          user: { ...user, currentRoomId: null }
+        })
+      }
+      toast('房间不存在或已关闭')
+      navigate('/', { replace: true })
+    }
+  }, [error, isLoading, room, roomId, navigate])
+
   useEffect(() => {
     if (roomId && token && !connectedRef.current) {
       connect(token, roomId)
