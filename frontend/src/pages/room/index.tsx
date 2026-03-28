@@ -138,7 +138,12 @@ export default function RoomPage() {
       const currentUser = useAuthStore.getState().user
       if (currentUser?.currentRoomId === roomId) {
         useAuthStore.setState({
-          user: { ...currentUser, currentRoomId: null }
+          user: {
+            userId: currentUser.userId,
+            phone: currentUser.phone,
+            nickname: currentUser.nickname,
+            currentRoomId: null
+          }
         })
       }
       toast('房间不存在或已关闭')
