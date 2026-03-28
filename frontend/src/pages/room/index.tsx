@@ -136,7 +136,7 @@ export default function RoomPage() {
   useEffect(() => {
     if (error && !isLoading && !room) {
       const currentUser = useAuthStore.getState().user
-      if (currentUser?.currentRoomId === roomId) {
+      if (currentUser && currentUser.currentRoomId === roomId) {
         useAuthStore.setState({
           user: {
             userId: currentUser.userId,
